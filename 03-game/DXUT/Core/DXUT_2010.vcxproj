@@ -27,37 +27,37 @@
 </ProjectConfiguration>
 </ItemGroup>
 <PropertyGroup Label="Globals">
-<ProjectName>DgswGame2021Ex</ProjectName>
-<ProjectGuid>{D3D10008-96D0-4629-88B8-122C0256058C}</ProjectGuid>
-<RootNamespace>DgswGame2021Ex</RootNamespace>
+<ProjectName>DXUT</ProjectName>
+<ProjectGuid>{E0CF097B-F22D-465B-A884-D89E55BD7ECD}</ProjectGuid>
+<RootNamespace>DXUT</RootNamespace>
 <Keyword>Win32Proj</Keyword>
 </PropertyGroup>
 <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
 <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-<ConfigurationType>Application</ConfigurationType>
+<ConfigurationType>StaticLibrary</ConfigurationType>
 <CharacterSet>Unicode</CharacterSet>
 </PropertyGroup>
 <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|X64'" Label="Configuration">
-<ConfigurationType>Application</ConfigurationType>
+<ConfigurationType>StaticLibrary</ConfigurationType>
 <CharacterSet>Unicode</CharacterSet>
 </PropertyGroup>
 <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-<ConfigurationType>Application</ConfigurationType>
+<ConfigurationType>StaticLibrary</ConfigurationType>
 <WholeProgramOptimization>true</WholeProgramOptimization>
 <CharacterSet>Unicode</CharacterSet>
 </PropertyGroup>
 <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|X64'" Label="Configuration">
-<ConfigurationType>Application</ConfigurationType>
+<ConfigurationType>StaticLibrary</ConfigurationType>
 <WholeProgramOptimization>true</WholeProgramOptimization>
 <CharacterSet>Unicode</CharacterSet>
 </PropertyGroup>
 <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'" Label="Configuration">
-<ConfigurationType>Application</ConfigurationType>
+<ConfigurationType>StaticLibrary</ConfigurationType>
 <WholeProgramOptimization>true</WholeProgramOptimization>
 <CharacterSet>Unicode</CharacterSet>
 </PropertyGroup>
 <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profile|X64'" Label="Configuration">
-<ConfigurationType>Application</ConfigurationType>
+<ConfigurationType>StaticLibrary</ConfigurationType>
 <WholeProgramOptimization>true</WholeProgramOptimization>
 <CharacterSet>Unicode</CharacterSet>
 </PropertyGroup>
@@ -134,16 +134,15 @@
 <FloatingPointModel>Fast</FloatingPointModel>
 <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
 <ExceptionHandling>Sync</ExceptionHandling>
-<AdditionalIncludeDirectories>DXUT\Core;DXUT\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+<AdditionalIncludeDirectories>..\..\\Core;..\..\\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
-<PreprocessorDefinitions>WIN32;_DEBUG;DEBUG;PROFILE;_WINDOWS;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+<PreprocessorDefinitions>WIN32;_DEBUG;DEBUG;PROFILE;_WINDOWS;_LIB;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
 <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-<PrecompiledHeader>Use</PrecompiledHeader>
-<PrecompiledHeaderFile>DXUT.h</PrecompiledHeaderFile></ClCompile>
+</ClCompile>
 <Link>
 <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
-<AdditionalDependencies>d3dx10d.lib;d3dx9d.lib;dxerr.lib;dxguid.lib;winmm.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
 <SubSystem>Windows</SubSystem>
 <GenerateDebugInformation>true</GenerateDebugInformation>
 <LargeAddressAware>true</LargeAddressAware>
@@ -154,7 +153,7 @@
 <DelayLoadDLLs>%(DelayLoadDLLs)</DelayLoadDLLs>
 </Link>
 <Manifest>
-<EnableDPIAwareness>true</EnableDPIAwareness>
+<EnableDPIAwareness>false</EnableDPIAwareness>
 </Manifest>
 <PreBuildEvent>
 <Command></Command>
@@ -172,15 +171,14 @@
 <IntrinsicFunctions>true</IntrinsicFunctions>
 <FloatingPointModel>Fast</FloatingPointModel>
 <ExceptionHandling>Sync</ExceptionHandling>
-<AdditionalIncludeDirectories>DXUT\Core;DXUT\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+<AdditionalIncludeDirectories>..\..\\Core;..\..\\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
-<PreprocessorDefinitions>WIN32;_DEBUG;DEBUG;PROFILE;_WINDOWS;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+<PreprocessorDefinitions>WIN32;_DEBUG;DEBUG;PROFILE;_WINDOWS;_LIB;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-<PrecompiledHeader>Use</PrecompiledHeader>
-<PrecompiledHeaderFile>DXUT.h</PrecompiledHeaderFile></ClCompile>
+</ClCompile>
 <Link>
 <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
-<AdditionalDependencies>d3dx10d.lib;d3dx9d.lib;dxerr.lib;dxguid.lib;winmm.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
 <SubSystem>Windows</SubSystem>
 <GenerateDebugInformation>true</GenerateDebugInformation>
 <LargeAddressAware>true</LargeAddressAware>
@@ -191,7 +189,7 @@
 <DelayLoadDLLs>%(DelayLoadDLLs)</DelayLoadDLLs>
 </Link>
 <Manifest>
-<EnableDPIAwareness>true</EnableDPIAwareness>
+<EnableDPIAwareness>false</EnableDPIAwareness>
 </Manifest>
 <PreBuildEvent>
 <Command></Command>
@@ -211,14 +209,13 @@
 <FloatingPointModel>Fast</FloatingPointModel>
 <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
 <ExceptionHandling>Sync</ExceptionHandling>
-<AdditionalIncludeDirectories>DXUT\Core;DXUT\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+<AdditionalIncludeDirectories>..\..\\Core;..\..\\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
-<PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-<PrecompiledHeader>Use</PrecompiledHeader>
-<PrecompiledHeaderFile>DXUT.h</PrecompiledHeaderFile></ClCompile>
+<PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_LIB;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+</ClCompile>
 <Link>
 <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
-<AdditionalDependencies>d3dx10.lib;d3dx9.lib;dxerr.lib;dxguid.lib;winmm.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
 <GenerateDebugInformation>true</GenerateDebugInformation>
 <SubSystem>Windows</SubSystem>
 <OptimizeReferences>true</OptimizeReferences>
@@ -231,7 +228,7 @@
 <DelayLoadDLLs>%(DelayLoadDLLs)</DelayLoadDLLs>
 </Link>
 <Manifest>
-<EnableDPIAwareness>true</EnableDPIAwareness>
+<EnableDPIAwareness>false</EnableDPIAwareness>
 </Manifest>
 <PreBuildEvent>
 <Command></Command>
@@ -250,14 +247,13 @@
 <IntrinsicFunctions>true</IntrinsicFunctions>
 <FloatingPointModel>Fast</FloatingPointModel>
 <ExceptionHandling>Sync</ExceptionHandling>
-<AdditionalIncludeDirectories>DXUT\Core;DXUT\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+<AdditionalIncludeDirectories>..\..\\Core;..\..\\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
-<PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-<PrecompiledHeader>Use</PrecompiledHeader>
-<PrecompiledHeaderFile>DXUT.h</PrecompiledHeaderFile></ClCompile>
+<PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_LIB;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+</ClCompile>
 <Link>
 <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
-<AdditionalDependencies>d3dx10.lib;d3dx9.lib;dxerr.lib;dxguid.lib;winmm.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
 <GenerateDebugInformation>true</GenerateDebugInformation>
 <SubSystem>Windows</SubSystem>
 <OptimizeReferences>true</OptimizeReferences>
@@ -270,7 +266,7 @@
 <DelayLoadDLLs>%(DelayLoadDLLs)</DelayLoadDLLs>
 </Link>
 <Manifest>
-<EnableDPIAwareness>true</EnableDPIAwareness>
+<EnableDPIAwareness>false</EnableDPIAwareness>
 </Manifest>
 <PreBuildEvent>
 <Command></Command>
@@ -290,14 +286,13 @@
 <FloatingPointModel>Fast</FloatingPointModel>
 <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
 <ExceptionHandling>Sync</ExceptionHandling>
-<AdditionalIncludeDirectories>DXUT\Core;DXUT\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+<AdditionalIncludeDirectories>..\..\\Core;..\..\\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
-<PreprocessorDefinitions>WIN32;NDEBUG;PROFILE;_WINDOWS;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-<PrecompiledHeader>Use</PrecompiledHeader>
-<PrecompiledHeaderFile>DXUT.h</PrecompiledHeaderFile></ClCompile>
+<PreprocessorDefinitions>WIN32;NDEBUG;PROFILE;_WINDOWS;_LIB;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+</ClCompile>
 <Link>
 <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
-<AdditionalDependencies>d3dx10.lib;d3dx9.lib;dxerr.lib;dxguid.lib;winmm.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
 <GenerateDebugInformation>true</GenerateDebugInformation>
 <SubSystem>Windows</SubSystem>
 <OptimizeReferences>true</OptimizeReferences>
@@ -310,7 +305,7 @@
 <DelayLoadDLLs>%(DelayLoadDLLs)</DelayLoadDLLs>
 </Link>
 <Manifest>
-<EnableDPIAwareness>true</EnableDPIAwareness>
+<EnableDPIAwareness>false</EnableDPIAwareness>
 </Manifest>
 <PreBuildEvent>
 <Command></Command>
@@ -329,15 +324,14 @@
 <IntrinsicFunctions>true</IntrinsicFunctions>
 <FloatingPointModel>Fast</FloatingPointModel>
 <ExceptionHandling>Sync</ExceptionHandling>
-<AdditionalIncludeDirectories>DXUT\Core;DXUT\Optional;%(AdditionalIncludeDirectories)
+<AdditionalIncludeDirectories>..\..\\Core;..\..\\Optional;%(AdditionalIncludeDirectories)
       </AdditionalIncludeDirectories>
 <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
-<PreprocessorDefinitions>WIN32;NDEBUG;PROFILE;_WINDOWS;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-<PrecompiledHeader>Use</PrecompiledHeader>
-<PrecompiledHeaderFile>DXUT.h</PrecompiledHeaderFile></ClCompile>
+<PreprocessorDefinitions>WIN32;NDEBUG;PROFILE;_WINDOWS;_LIB;D3DXFX_LARGEADDRESS_HANDLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+</ClCompile>
 <Link>
 <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
-<AdditionalDependencies>d3dx10.lib;d3dx9.lib;dxerr.lib;dxguid.lib;winmm.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
 <GenerateDebugInformation>true</GenerateDebugInformation>
 <SubSystem>Windows</SubSystem>
 <OptimizeReferences>true</OptimizeReferences>
@@ -350,7 +344,7 @@
 <DelayLoadDLLs>%(DelayLoadDLLs)</DelayLoadDLLs>
 </Link>
 <Manifest>
-<EnableDPIAwareness>true</EnableDPIAwareness>
+<EnableDPIAwareness>false</EnableDPIAwareness>
 </Manifest>
 <PreBuildEvent>
 <Command></Command>
@@ -359,39 +353,19 @@
 <Command></Command>
 </PostBuildEvent>
 </ItemDefinitionGroup>
+<ItemGroup />
 <ItemGroup>
-<None Include="DXUT\Optional\directx.ico" />
-<ClInclude Include="DXUT\Core\DXUT.h" />
-<ClInclude Include="DXUT\Core\DXUTenum.h" />
-<ClInclude Include="DXUT\Core\DXUTmisc.h" />
-<ClCompile Include="DXUT\Core\DXUT.cpp">
-<PrecompiledHeader>Create</PrecompiledHeader>
-</ClCompile>
-<ClCompile Include="DXUT\Core\DXUTenum.cpp" />
-<ClCompile Include="DXUT\Core\DXUTmisc.cpp" />
-<ClInclude Include="DXUT\Optional\DXUTcamera.h" />
-<ClInclude Include="DXUT\Optional\DXUTgui.h" />
-<ClInclude Include="DXUT\Optional\DXUTres.h" />
-<ClInclude Include="DXUT\Optional\DXUTsettingsdlg.h" />
-<ClInclude Include="DXUT\Optional\SDKmesh.h" />
-<ClInclude Include="DXUT\Optional\SDKmisc.h" />
-<ClCompile Include="DXUT\Optional\DXUTcamera.cpp" />
-<ClCompile Include="DXUT\Optional\DXUTgui.cpp" />
-<ClCompile Include="DXUT\Optional\DXUTres.cpp" />
-<ClCompile Include="DXUT\Optional\DXUTsettingsdlg.cpp" />
-<ClCompile Include="DXUT\Optional\SDKmesh.cpp" />
-<ClCompile Include="DXUT\Optional\SDKmisc.cpp" />
+      <ClCompile Include="DXUT.cpp" />
+      <CLInclude Include="DXUT.h" />
+      <ClCompile Include="DXUTenum.cpp" />
+      <CLInclude Include="DXUTenum.h" />
+      <ClCompile Include="DXUTmisc.cpp" />
+      <CLInclude Include="DXUTmisc.h" />
+  </ItemGroup>
+<ItemGroup>
 </ItemGroup>
 <ItemGroup>
-      <ClCompile Include="DgswGame2021Ex.cpp" />
-  </ItemGroup>
-<ItemGroup>
-      <None Include="DgswGame2021Ex.fx" />
-  </ItemGroup>
-<ItemGroup>
-      <CLInclude Include="resource.h" />
-      <ResourceCompile Include="DgswGame2021Ex.rc" />
-  </ItemGroup>
+</ItemGroup>
 <ItemGroup>
 </ItemGroup>
 <ItemGroup>
