@@ -1,80 +1,128 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Rooms\RoomStart.cpp" />
     <ClCompile Include="DgswGame2021Ex.cpp" />
     <ClCompile Include="DXUT\Core\DXUT.cpp">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClCompile>
     <ClCompile Include="DXUT\Optional\DXUTcamera.cpp">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClCompile>
     <ClCompile Include="DXUT\Core\DXUTenum.cpp">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClCompile>
     <ClCompile Include="DXUT\Optional\DXUTgui.cpp">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClCompile>
     <ClCompile Include="DXUT\Core\DXUTmisc.cpp">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClCompile>
     <ClCompile Include="DXUT\Optional\DXUTres.cpp">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClCompile>
     <ClCompile Include="DXUT\Optional\DXUTsettingsdlg.cpp">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClCompile>
     <ClCompile Include="DXUT\Optional\SDKmesh.cpp">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClCompile>
     <ClCompile Include="DXUT\Optional\SDKmisc.cpp">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClCompile>
     <ClCompile Include="DXUT\Optional\SDKsound.cpp">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClCompile>
     <ClCompile Include="DXUT\Optional\SDKwavefile.cpp">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="Rooms\RoomStart.cpp">
+      <Filter>Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Rooms\RoomStage2.cpp">
+      <Filter>Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Rooms\RoomGameInfo.cpp">
+      <Filter>Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Rooms\RoomGameRule.cpp">
+      <Filter>Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Rooms\RoomIntro.cpp">
+      <Filter>Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Rooms\RoomStage1.cpp">
+      <Filter>Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Rooms\RoomCredit.cpp">
+      <Filter>Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Rooms\RoomRanking.cpp">
+      <Filter>Rooms</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Macros.h" />
     <ClInclude Include="Sys.h" />
     <ClInclude Include="DXUT\Core\DXUT.h">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClInclude>
     <ClInclude Include="DXUT\Optional\DXUTcamera.h">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClInclude>
     <ClInclude Include="DXUT\Core\DXUTenum.h">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClInclude>
     <ClInclude Include="DXUT\Optional\DXUTgui.h">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClInclude>
     <ClInclude Include="DXUT\Core\DXUTmisc.h">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClInclude>
     <ClInclude Include="DXUT\Optional\DXUTres.h">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClInclude>
     <ClInclude Include="DXUT\Optional\DXUTsettingsdlg.h">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClInclude>
     <CLInclude Include="resource.h">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </CLInclude>
     <ClInclude Include="DXUT\Optional\SDKmesh.h">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClInclude>
     <ClInclude Include="DXUT\Optional\SDKmisc.h">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClInclude>
     <ClInclude Include="DXUT\Optional\SDKsound.h">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
     </ClInclude>
     <ClInclude Include="DXUT\Optional\SDKwavefile.h">
-      <Filter>DXUT</Filter>
+      <Filter>Components\DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="Components.h" />
+    <ClInclude Include="Components\Player.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Tran.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Hitbox.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Sprite.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Stage.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Items.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\UI.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Virus.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -85,7 +133,13 @@
     <None Include="DgswGame2021Ex.fx" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="DXUT">
+    <Filter Include="Components">
+      <UniqueIdentifier>{70a54938-d58d-43fa-9795-012f611b3a35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rooms">
+      <UniqueIdentifier>{6846f3d3-aa47-42df-9895-f9033922b19b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\DXUT">
       <UniqueIdentifier>{0ce29f01-596c-449f-bf83-a945833ba6e2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

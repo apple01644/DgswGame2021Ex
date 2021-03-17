@@ -209,6 +209,7 @@ struct Room {
 		std::for_each(entities.begin(), entities.end(), [&](Entity* e) {e->EventRender(); });
 	};
 	virtual void OnMsg(UINT Msg, WPARAM wParam, LPARAM lParam) {
+		CheatCallback(Msg, wParam, lParam);
 		std::for_each(entities.begin(), entities.end(), [&](Entity* e) {e->EventMsg(Msg, wParam, lParam); });
 	}
 	virtual const char* GetName() { return "[Room empty]"; }
@@ -231,6 +232,7 @@ struct Room {
 
 	list<Entity*> entities{};
 	list<Entity*> future_entities{};
+	void CheatCallback(UINT Msg, WPARAM wParam, LPARAM lParam);
 };
 extern Room* curr_room;
 extern Room* next_room;
@@ -278,6 +280,16 @@ struct Sys {
 	XMMATRIX V = XMMatrixIdentity();
 	XMMATRIX P = XMMatrixIdentity();
 	float depth = 0;
+	float SURF_W = 1920;
+	float SURF_H = 1080;
+	DXGI_SURFACE_DESC SRD;
+
+	struct {
+		bool superman = false;
+		bool write_score = false;
+		int score = 0;
+		int hp_score = 0;
+	} global_variables;
 
 	void SetStartRoom();
 
@@ -353,15 +365,15 @@ struct Sys {
 
 	inline void RenderText(ID3DX10Font* font, std::string text, f2 pos, f4 color = { 0,0,0,1 }) {
 		RECT rect = {
-			pos.x, pos.y,
+			((pos.x * 1080.f / 1920 + (1920 - 1080) / 1080.f * 180) * SRD.Width) / 640 , pos.y * SRD.Height / 640 ,
 			0, 0
 		};
 		font->DrawTextA(nullptr, text.c_str(), -1, &rect, DT_NOCLIP, D3DXCOLOR((float*)&color));
 	}
 	inline void RenderText(ID3DX10Font* font, std::string text, f2 pos, f2 siz, f4 color = { 0,0,0,1 }) {
 		RECT rect = {
-			pos.x, pos.y,
-			pos.x + siz.x, pos.y + siz.y
+			((pos.x * 1080.f / 1920 + (1920 - 1080) / 1080.f * 180) * SRD.Width) / 640 , pos.y * SRD.Height / 640 ,
+			(((pos.x + siz.x) * 1080.f / 1920 + (1920 - 1080) / 1080.f * 180) * SRD.Width) / 640,  (pos.y + siz.y) * SRD.Height / 640
 		};
 		font->DrawTextA(nullptr, text.c_str(), -1, &rect, DT_CENTER | DT_VCENTER | DT_NOCLIP, D3DXCOLOR((float*)&color));
 	}
@@ -388,6 +400,16 @@ inline Entity* operator"" _ent(const char* raw_name, size_t n) {
 		return nullptr;
 	else
 		return *itr;
+}
+
+inline size_t  operator"" _ent_count(const char* raw_name, size_t n) {
+	string target_name{ raw_name };
+	size_t result = 0;
+	for (const auto& e : R.entities) {
+		if (e->name == target_name)
+			result += 1;
+	}
+	return result;
 }
 
 inline ID3DX10Font* Font(string font_name, int size) {

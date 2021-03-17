@@ -1,6 +1,7 @@
 struct Widget : Prop {
 	def_c(Widget);
 	bool border = false;
+	bool visible = true;
 	string text = "";
 
 	void OnBorn() override {
@@ -8,8 +9,10 @@ struct Widget : Prop {
 	}
 
 	void OnRender() override {
-		if (border) S._RenderDrawRect(e.tran.pos, e.tran.siz);
-		S.Render(e.tran.pos, e.tran.siz);
-		S.RenderText(Font("Consolas", 25), text, e.tran.pos, e.tran.siz);
+		if (visible) {
+			if (border) S._RenderDrawRect(e.tran.pos, e.tran.siz);
+			S.Render(e.tran.pos, e.tran.siz);
+			S.RenderText(Font("Consolas", 25), text, e.tran.pos, e.tran.siz);
+		}
 	}
 };

@@ -12,6 +12,53 @@ struct Player : Prop {
 	int life = 5;
 	float hit_time = 1;
 
+	int item_speed = 3;
+	int item_defense = 3;
+	int item_superman = 1;
+	int item_health = 2;
+	int item_random = 5;
+	std::string item_text = "";
+
+	float superman_time = 0;
+
+	enum ItemState {
+		Null,
+		Speed,
+		Defense,
+		Superman,
+		Health,
+		Random
+	};
+
+	ItemState item_state = ItemState::Null;
+
+	f2 item_get_pos{};
+
+	void SetItemEffect(ItemState is) {
+		item_get_pos.x = curr.x * tile_size.x - 50;
+		item_get_pos.y = curr.y * tile_size.y;
+		if (is == ItemState::Random) {
+			item_text = "∑£¥˝æ∆¿Ã≈€ »πµÊ";
+			if (int k = rand() % 4; k == 0) is = ItemState::Speed;
+			else if (k == 1) is = ItemState::Defense;
+			else if (k == 2) is = ItemState::Superman;
+			else is = ItemState::Health;
+		}
+		else if (is == ItemState::Speed) item_text = "º”µµæ∆¿Ã≈€ »πµÊ";
+		else if (is == ItemState::Defense) item_text = "πÊæÓæ∆¿Ã≈€ »πµÊ";
+		else if (is == ItemState::Superman) item_text = "π´¿˚æ∆¿Ã≈€ »πµÊ";
+		else if (is == ItemState::Health) item_text = "√º∑¬æ∆¿Ã≈€ »πµÊ";
+		if (item_state != is) {
+			if (item_state == ItemState::Superman) superman_time = 0;
+			if (is == ItemState::Superman) superman_time = 5;
+
+			else if (is == ItemState::Health)
+				if (life < 5) ++life;
+				else S.global_variables.hp_score += 500;
+			item_state = is;
+		}
+	}
+
 	int FillEntry(list<POINT> start_p, char flag) {
 		int result = 1;
 
@@ -79,8 +126,27 @@ struct Player : Prop {
 			}
 	}
 
+	void OnRender() override {
+		S.RenderText(Font("Consolas", 25), item_text, f2(item_get_pos.x + 1, item_get_pos.y + 1), f2{ 100, 30 });
+		item_get_pos.y -= 10 * DT * 32;
+		S.RenderText(Font("Consolas", 25), item_text, f2(item_get_pos.x, item_get_pos.y), f2{ 100, 30 }, f4{ 1,1,1,1 });
+	}
+
+	void OnMsg(UINT Msg, WPARAM wParam, LPARAM lParam) override {
+		if (Msg == WM_KEYDOWN) {
+			if (wParam == VK_F2)
+				SetItemEffect(ItemState::Random);
+		}
+	}
+
 	void OnStep() override {
 		if (life <= 0) return;
+		if (superman_time >= 0) {
+			superman_time -= DT;
+			if (superman_time < 0) {
+				item_state = ItemState::Null;
+			}
+		}
 		float X = (curr.x * move_p + prev.x * (1 - move_p)) * tile_size.x;
 		float Y = (curr.y * move_p + prev.y * (1 - move_p)) * tile_size.y;
 
@@ -98,7 +164,11 @@ struct Player : Prop {
 			mode == 'W' && curr.y > 0 ||
 			mode == 'S' && curr.y + 1 < map_size.h
 			)
+		{
 			move_p += DT * 50;
+			if (item_state == ItemState::Speed)
+				move_p += DT * 50;
+		}
 		while (move_p > 1) {
 			move_p -= 1;
 			prev = curr;
@@ -163,10 +233,42 @@ struct Player : Prop {
 
 			if (!map[prev.x][prev.y].healed && map[curr.x][curr.y].healed) {
 				FillArea();
+				while (item_speed + item_defense + item_superman + item_health + item_random > 0) {
+					if (int idx = rand() % 5; idx == 0 && item_speed > 0) {
+						item_speed -= 1;
+						SetItemEffect(ItemState::Speed);
+						break;
+					}
+					else if (idx == 1 && item_defense > 0) {
+						item_defense -= 1;
+						SetItemEffect(ItemState::Defense);
+						break;
+					}
+					else if (idx == 2 && item_superman > 0) {
+						item_superman -= 1;
+						SetItemEffect(ItemState::Superman);
+						break;
+					}
+					else if (idx == 3 && item_health > 0) {
+						item_health -= 1;
+						SetItemEffect(ItemState::Health);
+						break;
+					}
+					else if (item_random > 0) {
+						item_random -= 1;
+						SetItemEffect(ItemState::Random);
+						break;
+					}
+				}
 			}
 		}
 		float colorg = life / 5.f;
-		if (hit_time < 1) {
+		if (superman_time > 0) {
+			e.prop<Sprite>().color = f4(
+				0.5, 0.5, 1, 0.75 + 0.25 * sinf(T * 60 / XM_2PI)
+			);
+		}
+		else if (hit_time < 1) {
 			hit_time += DT * 0.5;
 			e.prop<Sprite>().color = f4(
 				1, colorg, colorg, 0.5 + 0.5 * sinf(hit_time * 60 / XM_2PI)
@@ -180,7 +282,11 @@ struct Player : Prop {
 
 	void Hitted() {
 		if (hit_time >= 1) {
-			life -= 1;
+			if (superman_time > 0);
+			else  if (item_state == ItemState::Defense) {
+				item_state = ItemState::Null;
+			}
+			else life -= 1;
 			hit_time = 0;
 		}
 	}

@@ -1,4 +1,5 @@
 #include "DXUT.h"
+#include <time.h>
 
 Room* curr_room = nullptr;
 Room* next_room = nullptr;
@@ -29,13 +30,18 @@ HRESULT CALLBACK OnD3D10CreateDevice(ID3D10Device* D, const DXGI_SURFACE_DESC* p
 	}
 	sys->EventInit();
 
+	//if (DXUTGetDeviceSettings().d3d9.pp.Windowed)
+
 	return S_OK;
 }
 
 HRESULT CALLBACK OnD3D10ResizedSwapChain(ID3D10Device* D, IDXGISwapChain* pSwapChain, const DXGI_SURFACE_DESC* Surf, void* pUserContext)
 {
-	S.P = XMMatrixScaling(2.f / Surf->Width, -2.f / Surf->Height, 0) * XMMatrixTranslation(-1, 1, 0);
+	S.P = XMMatrixScaling(2.f / 640 * 1080 / 1920, -2.f / 640, 0) * XMMatrixTranslation(-1 + 1.f * (1920 - 1080) / 1920, 1, 0);
 	S.ProjVar->SetMatrix(S.P.r->m128_f32);
+	S.SRD = *Surf;
+	//S.SURF_W = Surf->Width;
+	//S.SURF_H = Surf->Height;
 	return S_OK;
 }
 
@@ -90,12 +96,18 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	DXUTSetCallbackKeyboard(OnKeyboard);
 	DXUTSetCallbackFrameMove(OnFrameMove);
 
-	DXUTInit(true, true, NULL);     DXUTSetCursorSettings(true, true);     DXUTCreateWindow(L"DgswGame2021Ex");
+	srand(time(nullptr));
+
+	DXUTInit(true, true, NULL);
+	DXUTSetCursorSettings(true, true);
+	DXUTCreateWindow(L"DgswGame2021Ex");
 	E, SND.Initialize(DXUTGetHWND(), DSSCL_PRIORITY);
-	DXUTCreateDevice(true, Window.w, Window.h);
+
+	DXUTCreateDevice(false, Window.w, Window.h);
 	DXUTMainLoop();
 	for (const auto& pair : SoundMap) delete pair.second;
 	SND.~CSoundManager();
+
 	return DXUTGetExitCode();
 }
 
@@ -219,5 +231,25 @@ void Sys::EventRender() {
 		next_room = nullptr;
 		L = "Enter", R.GetName();
 		R.OnEnter();
+	}
+}
+
+void Sys::SetStartRoom() {
+	//newRoom<RIntro>();
+	newRoom<RStart>();
+	L = "[Sys SetStartRoom]", next_room == nullptr;
+}
+
+void Room::CheatCallback(UINT Msg, WPARAM wParam, LPARAM lParam) {
+	if (Msg == WM_KEYDOWN) {
+		if (wParam == VK_F4) {
+			if (next_room == nullptr)  newRoom < RStart>();
+		}
+		else if (wParam == VK_F5) {
+			if (next_room == nullptr)  newRoom < RStage1>();
+		}
+		else if (wParam == VK_F6) {
+			if (next_room == nullptr)  newRoom < RStage2>();
+		}
 	}
 }

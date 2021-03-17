@@ -27,6 +27,7 @@ struct RStage2 : Room {
 
 	obj_ speed_virus = func_obj{
 		obj.newProp<Tran>();
+		obj.name = "virus";
 		obj.newProp<Sprite>("Img/sprites/redback_new.png"_tex);
 		auto& virus = obj.newProp<Virus>();
 		virus.siz = { 3,3 };
@@ -35,6 +36,7 @@ struct RStage2 : Room {
 
 	obj_ size_virus = func_obj{
 		obj.newProp<Tran>();
+		obj.name = "virus";
 		obj.newProp<Sprite>("Img/sprites/redback_new.png"_tex);
 		auto& virus = obj.newProp<Virus>();
 		virus.siz = { 6,6 };
@@ -43,6 +45,7 @@ struct RStage2 : Room {
 
 	obj_ flash_virus = func_obj{
 		obj.newProp<Tran>();
+		obj.name = "virus";
 		obj.newProp<Sprite>("Img/sprites/explosion6.png"_tex);
 		auto& virus = obj.newProp<Virus>();
 		virus.delta = { 0 ,0 };
@@ -52,10 +55,34 @@ struct RStage2 : Room {
 
 	obj_ toxino_virus = func_obj{
 		obj.newProp<Tran>();
+		obj.name = "boss";
 		obj.newProp<Sprite>("Img/sprites/draconic_base-green_new.png"_tex);
 		auto& virus = obj.newProp<Virus>();
 		virus.siz = { 12, 12 };
 		virus.move_speed = 15.f;
+		obj.OnStep = func_{
+			if ("virus"_ent_count < 10 && virus.flag == 0) {
+				virus.flag = 1;
+				for (int x = 0; x < 5; ++x)
+				{
+					auto& e = CreateEntity(speed_virus);
+					e.prop<Virus>().random_pos = 0;
+					e.prop<Virus>().curr = virus.curr;
+				}
+				for (int x = 0; x < 4; ++x)
+				{
+					auto& e = CreateEntity(size_virus);
+					e.prop<Virus>().random_pos = 0;
+					e.prop<Virus>().curr = virus.curr;
+				}
+				for (int x = 0; x < 3; ++x)
+				{
+					auto& e = CreateEntity(flash_virus);
+					e.prop<Virus>().random_pos = 0;
+					e.prop<Virus>().curr = virus.curr;
+				}
+			}
+		};
 	};
 
 	void OnEnter() override {
@@ -83,11 +110,37 @@ struct RStage2 : Room {
 		for (int x = 0; x < 3; ++x)
 			CreateEntity(flash_virus);
 		CreateEntity(toxino_virus);
+		CreateEntity(func_obj{
+			obj.newProp<Tran>();
+			auto & wg = obj.newProp<Widget>();
+			obj.tran.pos = { 30, 170};
+			obj.tran.siz = { 580, 300 };
+			obj.name = "gameover";
+			wg.text = "VIM이 파괴되었습니다. Enter를 누르면 다시 시작\nBackspace를 누르면 메뉴로 돌아갑니다.";
+			wg.visible = false;
+			});
+		CreateEntity(func_obj{
+			obj.newProp<Tran>();
+			auto& wg = obj.newProp<Widget>();
+			obj.tran.pos = { 30, 170};
+			obj.tran.siz = { 580, 300 };
+			obj.name = "game_win";
+			obj.OnStep = func_{
+				wg.text = "구역이 정화되었습니다. Enter를 누르면 랭킹등록합니다\n점수:" + std::to_string(S.global_variables.score);
+			};
+			wg.visible = false;
+			});
+		S.global_variables.write_score = false;
+		S.global_variables.hp_score = 0;
 	}
 	void OnLeave()override {
 	}
 	void OnStep() override {
 		Room::OnStep();
+		if (S.global_variables.superman)
+			"player"_ent->prop<Player>().life = 5;
+		if (("player"_ent->prop<Player>().life <= 0 || lefttime <= 0) && !"game_win"_ent->prop<Widget>().visible)
+			"gameover"_ent->prop<Widget>().visible = true;
 	}
 	void OnRender() override {
 		S.depth = 1;
@@ -118,15 +171,50 @@ struct RStage2 : Room {
 
 		int percent = 100.f * healed_count / all_count;
 		string text = "치료율 " + std::to_string(percent) + "%";
+		if (percent >= 80 && "boss"_ent == nullptr && !"gameover"_ent->prop<Widget>().visible)
+		{
+			"game_win"_ent->prop<Widget>().visible = true;
+			S.global_variables.write_score = true;
+		}
 		lefttime -= DT;
 		S.RenderText(Font("Consolas", 16), text, f2(2, 6), f4(0, 0, 0, 1));
 		S.RenderText(Font("Consolas", 16), text, f2(0, 4), f4(1, 1, 1, 1));
 		text = "남은시간: " + std::to_string((int)lefttime) + "   점수: " + std::to_string(healed_count);
+		S.global_variables.score = healed_count;
 		S.RenderText(Font("Consolas", 16), text, f2(2, 20), f4(0, 0, 0, 1));
 		S.RenderText(Font("Consolas", 16), text, f2(0, 18), f4(1, 1, 1, 1));
 	}
 	void OnMsg(UINT Msg, WPARAM wParam, LPARAM lParam) override {
+		if (Msg == WM_KEYDOWN) {
+			if (wParam == VK_F1) {
+				S.global_variables.superman = !S.global_variables.superman;
+			}
+			else if (wParam == VK_F3) {
+				"player"_ent->prop<Player>().life = 5;
+			}
+			else if ("gameover"_ent->prop<Widget>().visible) {
+				if (wParam == VK_RETURN)
+				{
+					ContinueGame();
+				}
+				else if (wParam == VK_BACK)
+				{
+					if (next_room == nullptr) newRoom<RStart>();
+				}
+			}
+			else if ("game_win"_ent->prop<Widget>().visible) {
+				if (wParam == VK_RETURN)
+				{
+					if (next_room == nullptr) newRoom<RRanking>();
+				}
+			}
+		}
 		Room::OnMsg(Msg, wParam, lParam);
 	}
+
+	void ContinueGame();
 };
 asr(RStage2);
+void RStage2::ContinueGame() {
+	if (next_room == nullptr)  newRoom < RStage2>();
+}

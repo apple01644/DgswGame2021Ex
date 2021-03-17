@@ -1,5 +1,6 @@
 struct Virus :Prop {
 	def_c(Virus);
+	bool random_pos = true;
 	POINT curr{};
 	POINT prev{};
 	POINT siz{};
@@ -8,6 +9,7 @@ struct Virus :Prop {
 	float move_p = 0;
 	float move_speed = 30;
 	bool flip_x = true;
+	int flag = 0;
 
 	bool CanGo(POINT next) {
 		bool result = true;
@@ -44,13 +46,15 @@ struct Virus :Prop {
 
 	void OnBorn() override {
 		L = "OnBorn";
-		do {
-			curr = {
-				1 + rand() % (map_size.w - 1 - siz.y),
-				1 + rand() % (map_size.h - 1 - siz.x)
-			};
-		} while (!CanGo(curr));
-		prev = curr;
+		if (random_pos)
+			do {
+				curr = {
+					1 + rand() % (map_size.w - 1 - siz.y),
+					1 + rand() % (map_size.h - 1 - siz.x)
+				};
+			} while (!CanGo(curr));
+			;
+			prev = curr;
 	}
 
 	void OnStep() override {

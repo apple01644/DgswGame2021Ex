@@ -391,7 +391,23 @@
   <ItemGroup>
     <ClCompile Include="DXUT\Optional\SDKsound.cpp" />
     <ClCompile Include="DXUT\Optional\SDKwavefile.cpp" />
+    <ClCompile Include="Rooms\RoomCredit.cpp" />
+    <ClCompile Include="Rooms\RoomGameInfo.cpp" />
+    <ClCompile Include="Rooms\RoomGameRule.cpp" />
+    <ClCompile Include="Rooms\RoomIntro.cpp" />
+    <ClCompile Include="Rooms\RoomRanking.cpp" />
+    <ClCompile Include="Rooms\RoomStage1.cpp" />
+    <ClCompile Include="Rooms\RoomStage2.cpp" />
     <ClCompile Include="Rooms\RoomStart.cpp" />
+    <ClInclude Include="Components.h" />
+    <ClInclude Include="Components\Hitbox.h" />
+    <ClInclude Include="Components\Items.h" />
+    <ClInclude Include="Components\Player.h" />
+    <ClInclude Include="Components\Sprite.h" />
+    <ClInclude Include="Components\Stage.h" />
+    <ClInclude Include="Components\Tran.h" />
+    <ClInclude Include="Components\UI.h" />
+    <ClInclude Include="Components\Virus.h" />
     <ClInclude Include="DXUT\Optional\SDKsound.h" />
     <ClInclude Include="DXUT\Optional\SDKwavefile.h" />
     <ClInclude Include="Macros.h" />
